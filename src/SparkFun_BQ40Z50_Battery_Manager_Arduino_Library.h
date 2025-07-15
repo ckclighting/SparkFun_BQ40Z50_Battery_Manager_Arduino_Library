@@ -8,12 +8,8 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   Lesser General Public License for more details.
 */
-
-#ifndef _SPARKFUN_BQ40Z50_BATTERY_MANAGER_LIBRARY_H
-#define _SPARKFUN_BQ40Z50_BATTERY_MANAGER_LIBRARY_H
-
-#include "Arduino.h"
-#include <Wire.h>
+#pragma once
+#include "i2c_bus.h"
 
 #define BQ40Z50_TEMPERATURE 0x08
 #define BQ40Z50_VOLTAGE 0x09
@@ -37,16 +33,16 @@
 
 class BQ40Z50
 {
-  private:
+private:
     const uint8_t bq40z50DeviceAddress = 0x0B;
-    TwoWire *_i2cPort;
+    i2c_bus_handle_t bus = nullptr;
+    i2c_bus_device_handle_t device = nullptr;
 
     uint8_t readRegister(uint8_t addr);
     uint16_t readRegister16(uint8_t addr);
 
-  public:
-    bool begin(TwoWire &wirePort = Wire);
-    bool isConnected();
+public:
+    bool begin(i2c_port_t port, int sda, int scl);
 
     float getTemperatureC();
     float getTemperatureF();
@@ -69,5 +65,3 @@ class BQ40Z50
     uint16_t getCellVoltage3Mv();
     uint16_t getCellVoltage4Mv();
 };
-
-#endif //_SPARKFUN_BQ40Z50_BATTERY_MANAGER_LIBRARY_H
