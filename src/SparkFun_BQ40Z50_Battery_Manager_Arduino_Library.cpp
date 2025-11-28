@@ -121,6 +121,16 @@ uint16_t BQ40Z50::getCycleCount()
     return (readRegister16(BQ40Z50_CYCLE_COUNT));
 }
 
+uint16_t BQ40Z50::getDesignCapacityMah()
+{
+    return (readRegister16(BQ40Z50_DESIGN_CAPACITY));
+}
+
+uint8_t BQ40Z50::getStateOfHealth()
+{
+    return (readRegister(BQ40Z50_STATE_OF_HEALTH));
+}
+
 uint16_t BQ40Z50::getCellVoltage1Mv()
 {
     return (readRegister16(BQ40Z50_CELL_VOLTAGE_1));

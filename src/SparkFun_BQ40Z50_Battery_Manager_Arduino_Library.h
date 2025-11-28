@@ -26,6 +26,8 @@
 #define BQ40Z50_CHARGING_CURRENT 0x14
 #define BQ40Z50_CHARGING_VOLTAGE 0x15
 #define BQ40Z50_CYCLE_COUNT 0x17
+#define BQ40Z50_DESIGN_CAPACITY 0x18
+#define BQ40Z50_STATE_OF_HEALTH 0x4F
 #define BQ40Z50_CELL_VOLTAGE_1 0x3F
 #define BQ40Z50_CELL_VOLTAGE_2 0x3E
 #define BQ40Z50_CELL_VOLTAGE_3 0x3D
@@ -60,6 +62,8 @@ public:
     uint16_t getChargingCurrentMa();
     uint16_t getChargingVoltageMv();
     uint16_t getCycleCount();
+    uint16_t getDesignCapacityMah();
+    uint8_t getStateOfHealth();
     uint16_t getCellVoltage1Mv();
     uint16_t getCellVoltage2Mv();
     uint16_t getCellVoltage3Mv();
