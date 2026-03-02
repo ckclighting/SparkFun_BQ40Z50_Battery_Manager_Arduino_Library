@@ -16,6 +16,7 @@
 bool BQ40Z50::begin(i2c_port_t port, int sda, int scl)
 {
     i2c_config_t conf{};
+    uint8_t value = 0;
 
     conf.mode = I2C_MODE_MASTER;
     conf.sda_io_num = sda;
@@ -29,7 +30,11 @@ bool BQ40Z50::begin(i2c_port_t port, int sda, int scl)
     device = i2c_bus_device_create(bus, bq40z50DeviceAddress, 0);
     if (device == nullptr)
         return false;
-    return true;
+
+    // check if device responds
+    auto ret = i2c_bus_read_byte(device, BQ40Z50_RELATIVE_STATE_OF_CHARGE, &value);
+
+    return ret == ESP_OK;
 }
 
 // Get/Set Helper Functions
